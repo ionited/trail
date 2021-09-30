@@ -1,0 +1,38 @@
+{
+  "name": "@ionited/trail",
+  "version": "0.1.0",
+  "description": "Guide your user, step by step",
+  "main": "./dist/trail.js",
+  "scripts": {
+    "start": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionited/trail.git"
+  },
+  "keywords": [
+    "Guide",
+    "Step",
+    "Tour",
+    "Trail",
+    "UI",
+    "User",
+    "UX"
+  ],
+  "author": "Ion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ionited/trail/issues"
+  },
+  "homepage": "https://github.com/ionited/trail#readme",
+  "files": [
+    "dist/**/*"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.5",
+    "rollup-plugin-scss": "^3.0.0",
+    "sass": "^1.42.1",
+    "typescript": "^4.4.3"
+  }
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="1024"
+   viewBox="0 0 270.93333 270.93334"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="C:\Projects\trail\docs\imgs\logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="0.36168631"
+     inkscape:cx="392.6054"
+     inkscape:cy="360.8099"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="true" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient898">
+      <stop
+         style="stop-color:#fffde7;stop-opacity:1;"
+         offset="0"
+         id="stop894" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0"
+         offset="1"
+         id="stop896" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient898"
+       id="linearGradient900"
+       x1="-0.73152643"
+       y1="27.066502"
+       x2="948.61969"
+       y2="27.066502"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:url(#linearGradient900);fill-opacity:1;stroke:none;stroke-width:0.102708"
+       d="M 0,26.45833 V 0 h 67.73333 67.73334 V 26.45833 52.91667 H 67.73333 0 Z"
+       id="path1238" />
+    <path
+       id="rect2291"
+       style="fill:#fbc02d;stroke-width:0.138125"
+       d="M 135.46667,0 H 270.93333 V 52.916668 H 135.46667 Z m 26.45832,26.458334 A 26.458334,26.458334 0 0 1 135.46666,52.916668 26.458334,26.458334 0 0 1 109.00833,26.458334 26.458334,26.458334 0 0 1 135.46666,0 26.458334,26.458334 0 0 1 161.92499,26.458334 Z m -52.91666,0 H 161.925 V 270.93334 h -52.91667 z" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0;stroke-width:0.0661458"
+       id="path1767"
+       cx="10.24138"
+       cy="68.763542"
+       rx="72.786949"
+       ry="56.693348" />
+  </g>
+</svg>

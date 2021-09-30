@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="one" style="position: relative; top: 50vh;">ONE</button>
+  <button id="two" style="position: relative; top: 200vh;">TWO</button>
+  <button id="three" style="position: relative; top: 350vh;">THREE</button>
+
+  <script src="../dist/trail.js"></script>
+
+  <script>
+    const trail = Trail([{
+      id: 1,
+      content: 'Esse botão é muito legal',
+      attachedEl: document.getElementById('one')
+    }, {
+      id: 2,
+      content: 'Aqui não tem nenhum el'
+    }, {
+      id: 3,
+      content: 'Botão 2!',
+      attachedEl: document.getElementById('two')
+    }, {
+      id: 4,
+      content: 'Olha o botão 3!',
+      attachedEl: document.getElementById('three')
+    }]);
+  </script>
+</body>
+</html>

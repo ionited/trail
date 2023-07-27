@@ -114,7 +114,7 @@ export class TrailStep {
     this.backdrop.style.width = rect.width + 'px';
     this.backdrop.style.height = rect.height + 'px';
 
-    this.backdrop.style.transform = `translate(${tx > 0 ? 0 : tx}px, ${ty > 0 ? 0 : ty}px)`;
+    this.backdrop.style.transform = `translate(${tx > 0 ? 0 : rect.left < -rect.width ? -window.innerWidth - Math.ceil(rect.width) : tx}px, ${ty > 0 ? 0 : rect.top < -rect.height ? -window.innerHeight - Math.ceil(rect.height) : ty}px)`;
   }
 
   private contentPosition(step: Step, rect?: DOMRect) {

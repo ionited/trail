@@ -22,12 +22,14 @@
   }
 
   & &-backdrop {
-    top: -200vmax;
-    left: -200vmax;
-    border: 200vmax solid rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    border: 100vmax solid rgba(0, 0, 0, 0.5);
     display: none;
     position: inherit;
     opacity: 0;
+    position: fixed;
+    transition: width 0.25s ease-in-out;
 
     &.show {
       display: block;

@@ -2,36 +2,33 @@ import styles from './scss/index.scss';
 import { Step, TrailStep } from './step';
 
 export class TrailCore {
-
+  step: TrailStep;
   steps: Step[];
 
   private stepId = null;
   private trail?: HTMLElement;
 
   constructor(steps?: Step[]) {
-    this.steps = steps ?? [];
-
     this.addStyles();
     this.addWrapper();
+
+    this.steps = steps ?? [];
+    this.step = new TrailStep(this.steps);
   }
 
   back() {
-    const step = new TrailStep(this.steps);
 
-    this.stepId = step.back(this.stepId);
+    this.stepId = this.step.back(this.stepId);
   }
 
   next() {
-    const step = new TrailStep(this.steps);
-
-    this.stepId = step.next(this.stepId);
+    this.stepId = this.step.next(this.stepId);
   }
 
   stop() {
     const
       backdrop = this.trail?.querySelector('.trail-backdrop') as HTMLElement,
-      content = this.trail?.querySelector('.trail-content') as HTMLElement
-    ;
+      content = this.trail?.querySelector('.trail-content') as HTMLElement;
 
     backdrop.classList.remove('visible');
     content.classList.remove('visible');

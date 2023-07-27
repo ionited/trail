@@ -38,6 +38,10 @@ export class TrailStep {
   move(currentId: any, step: Step) {
     if (!step) return currentId;
 
+    this.removeTarget();
+
+    step.attachedEl?.classList.add('trail-target');
+
     if (!this.content.classList.contains('show')) {
       const rect = this.getRect(step);
 
@@ -136,6 +140,10 @@ export class TrailStep {
 
   private listeners() {
     window.addEventListener('scroll', this.updateFunc as any, true);
+  }
+
+  private removeTarget() {
+    document.querySelectorAll('.trail-target').forEach(q => q.classList.remove('trail-target'));
   }
 
   private update() {

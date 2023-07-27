@@ -1,3 +1,13 @@
+body *, .trail .trail-backdrop {
+  pointer-events: none;
+  user-select: none;
+}
+
+.trail, .trail *, .trail-target {
+  pointer-events: auto;
+  user-select: auto;
+}
+
 .trail {
   top: 0;
   left: 0;

@@ -56,6 +56,7 @@ export interface Step {
   id: any;
   content: string;
   attachedEl?: HTMLElement | null;
+  interactive?: boolean;
 }
 
 interface TrailCore {

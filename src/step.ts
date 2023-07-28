@@ -2,6 +2,7 @@ export interface Step {
   id: any;
   content: string;
   attachedEl?: HTMLElement | null;
+  interactive?: boolean;
 }
 
 export class TrailStep {
@@ -41,6 +42,8 @@ export class TrailStep {
     this.removeTarget();
 
     step.attachedEl?.classList.add('trail-target');
+
+    this.backdrop.classList.toggle('interactive', step.interactive || step.interactive === undefined);
 
     if (!this.content.classList.contains('show')) {
       const rect = this.getRect(step);

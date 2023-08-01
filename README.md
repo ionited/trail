@@ -39,7 +39,8 @@ var trail = Trail([{
 }, {
   id: 3,
   content: 'Step 3',
-  attachedEl: document.getElementById('two')
+  attachedEl: document.getElementById('two'),
+  interactive: false
 }, {
   id: 4,
   content: 'Step 4, end of the line!',

@@ -41,6 +41,8 @@ export class TrailStep {
 
     this.removeTarget();
 
+    document.body.classList.add('trail-body');
+
     step.attachedEl?.classList.add('trail-target');
 
     this.backdrop.classList.toggle('interactive', step.interactive || step.interactive === undefined);

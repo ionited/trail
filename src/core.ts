@@ -33,6 +33,8 @@ export class TrailCore {
     backdrop.classList.remove('visible');
     content.classList.remove('visible');
 
+    document.body.classList.remove('trail-body');
+
     backdrop.ontransitionend = () => {
       backdrop.classList.remove('show');
       content.classList.remove('show');
@@ -43,6 +45,8 @@ export class TrailCore {
 
   destroy() {
     document.getElementById('trail-styles')?.remove();
+
+    document.body.classList.remove('trail-body');
 
     this.trail?.remove();
     this.trail = undefined;

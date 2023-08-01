@@ -1,11 +1,13 @@
-body *, .trail .trail-backdrop.interactive {
+body.trail-body *, .trail .trail-backdrop.interactive {
   pointer-events: none;
   user-select: none;
 }
 
-.trail, .trail *, .trail-target {
-  pointer-events: auto;
-  user-select: auto;
+.trail-body {
+  .trail, .trail *, .trail-target {
+    pointer-events: auto;
+    user-select: auto;
+  }
 }
 
 .trail {

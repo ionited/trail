@@ -4,9 +4,30 @@ body.trail-body *, .trail .trail-backdrop.interactive {
 }
 
 .trail-body {
-  .trail, .trail *, .trail-target {
+  .trail, .trail *, .trail-step, .trail-step *, .trail-target {
     pointer-events: auto;
     user-select: auto;
+  }
+}
+
+.trail-step {
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  display: none;
+  left: 0;
+  padding: 1em;
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  transition: opacity 0.25s ease-in-out;
+  z-index: 1;
+
+  &.show {
+    display: block;
+  }
+
+  &.visible {
+    opacity: 1;
   }
 }
 
@@ -26,10 +47,7 @@ body.trail-body *, .trail .trail-backdrop.interactive {
     }
 
     .trail-content {
-      transition: 
-        opacity 0.25s ease-in-out,
-        transform 0.25s ease-in-out
-      ;
+      transition: opacity 0.25s ease-in-out;
     }
   }
 

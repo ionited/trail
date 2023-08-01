@@ -1,6 +1,6 @@
 export interface Step {
   id: any;
-  content: string;
+  content: HTMLElement | string;
   attachedEl?: HTMLElement | null;
   interactive?: boolean;
 }
@@ -39,7 +39,7 @@ export class TrailStep {
   move(currentId: any, step: Step) {
     if (!step) return currentId;
 
-    this.removeTarget();
+    this.removeLast();
 
     document.body.classList.add('trail-body');
 
@@ -51,35 +51,39 @@ export class TrailStep {
       const rect = this.getRect(step);
 
       this.stepPosition(rect);
-      this.contentPosition(step, rect);
     }
 
     this.backdrop.classList.add('show');
-    this.content.classList.add('show');
 
-    this.content.innerHTML = step.content;
+    if (typeof step.content === 'string') this.content.classList.add('show');
+    else step.content.classList.add('show');
 
-    setTimeout(() => {
-      this.content.classList.add('visible');
-      this.backdrop.classList.add('visible');
-    });
+    setTimeout(() => this.backdrop.classList.add('visible'));
 
     if (step.attachedEl) {
-      this.scroll(
-        this.getRect(step),
-        () => {
-          const rect = this.getRect(step);
+      const rect = this.getRect(step);
 
-          this.stepPosition(rect);
-          this.contentPosition(step, rect);
-        }
-      );
+      this.scroll(rect);
+      this.stepPosition(rect);
     } else {
       this.backdrop.style.width = '0';
       this.backdrop.style.height = '0';
-
-      this.contentPosition(step);
     }
+
+    this.content.classList.remove('visible');
+
+    setTimeout(() => {
+      if (typeof step.content === 'string') {
+        this.content.innerHTML = step.content;
+        this.content.classList.add('visible');
+      } else step.content.classList.add('visible');
+
+      if (step.attachedEl) {
+        const rect = this.getRect(step);
+
+        this.contentPosition(step, rect);
+      } else this.contentPosition(step);
+    }, 250);
 
     this.currentStep = step;
 
@@ -98,14 +102,12 @@ export class TrailStep {
     return 0;
   }
 
-  private scroll(rect: DOMRect, afterScroll: Function) {
+  private scroll(rect: DOMRect) {
     let top = scrollY + rect.top - window.innerHeight + rect.height + 16;
 
     top = top > 0 ? top : 0;
 
     window.scrollTo({ top, behavior: 'smooth' });
-
-    afterScroll();
   }
 
   private stepPosition(rect: DOMRect) {
@@ -123,7 +125,7 @@ export class TrailStep {
   }
 
   private contentPosition(step: Step, rect?: DOMRect) {
-    const contentRect = this.content.getBoundingClientRect();
+    const contentRect = (typeof step.content === 'string' ? this.content : step.content).getBoundingClientRect();
 
     let
       x = 0,
@@ -140,15 +142,17 @@ export class TrailStep {
       y = window.innerHeight / 2 - contentRect.height / 2;
     }
 
-    this.content.style.transform = `translate(${x}px, ${y}px)`;
+    if (typeof step.content === 'string') this.content.style.translate = `${x}px ${y}px`;
+    else step.content.style.translate = `${x}px ${y}px`;
   }
 
   private listeners() {
     window.addEventListener('scroll', this.updateFunc as any, true);
   }
 
-  private removeTarget() {
+  private removeLast() {
     document.querySelectorAll('.trail-target').forEach(q => q.classList.remove('trail-target'));
+    document.querySelectorAll('.trail-step').forEach(q => q.classList.remove('visible'));
   }
 
   private update() {

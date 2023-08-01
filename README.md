@@ -55,7 +55,7 @@ Trail(steps?: Step[]): TrailCore
 
 export interface Step {
   id: any;
-  content: string;
+  content: HTMLElement | string;
   attachedEl?: HTMLElement | null;
   interactive?: boolean;
 }

@@ -47,16 +47,9 @@ export class TrailStep {
 
     this.backdrop.classList.toggle('interactive', step.interactive || step.interactive === undefined);
 
-    if (!this.content.classList.contains('show')) {
-      const rect = this.getRect(step);
-
-      this.stepPosition(rect);
-    }
-
     this.backdrop.classList.add('show');
 
-    if (typeof step.content === 'string') this.content.classList.add('show');
-    else step.content.classList.add('show');
+    this.content.classList.add('show');
 
     setTimeout(() => this.backdrop.classList.add('visible'));
 
@@ -64,19 +57,19 @@ export class TrailStep {
       const rect = this.getRect(step);
 
       this.scroll(rect);
-      this.stepPosition(rect);
-    } else {
-      this.backdrop.style.width = '0';
-      this.backdrop.style.height = '0';
-    }
+      this.backdropPosition(step, rect);
+    } else this.backdropPosition(step);
 
     this.content.classList.remove('visible');
 
     setTimeout(() => {
-      if (typeof step.content === 'string') {
-        this.content.innerHTML = step.content;
-        this.content.classList.add('visible');
-      } else step.content.classList.add('visible');
+      if (typeof step.content === 'string') this.content.innerHTML = step.content;
+      else {
+        this.content.innerHTML = '';
+        this.content.appendChild(step.content);
+      }
+
+      this.content.classList.add('visible');
 
       if (step.attachedEl) {
         const rect = this.getRect(step);
@@ -110,22 +103,20 @@ export class TrailStep {
     window.scrollTo({ top, behavior: 'smooth' });
   }
 
-  private stepPosition(rect: DOMRect) {
+  private backdropPosition(step: Step, rect?: DOMRect) {
     const
-      x = rect.x + rect.width >= 0 ? rect.x : -rect.width - 16,
-      y = rect.y + rect.height >= 0 ? rect.y : -rect.height - 16,
-      vmax = Math.max(window.innerWidth, window.innerHeight),
-      tx = -vmax + x,
-      ty = -vmax + y;
+      x = rect ? rect.x + rect.width >= 0 ? rect.x : -rect.width - 16 : window.innerWidth / 2,
+      y = rect ? rect.y + rect.height >= 0 ? rect.y : -rect.height - 16 : window.innerHeight / 2;
 
-    this.backdrop.style.width = rect.width + 'px';
-    this.backdrop.style.height = rect.height + 'px';
+    this.backdrop.style.width = (rect ? rect.width : 0) + 'px';
+    this.backdrop.style.height = (rect ? rect.height : 0) + 'px';
+    this.backdrop.style.borderRadius = step.attachedEl ? getComputedStyle(step.attachedEl).borderRadius : '0px';
 
-    this.backdrop.style.transform = `translate(${tx > 0 ? 0 : rect.left < -rect.width ? -window.innerWidth - Math.ceil(rect.width) : tx}px, ${ty > 0 ? 0 : rect.top < -rect.height ? -window.innerHeight - Math.ceil(rect.height) : ty}px)`;
+    this.backdrop.style.transform = `translate(${x}px, ${y}px)`;
   }
 
   private contentPosition(step: Step, rect?: DOMRect) {
-    const contentRect = (typeof step.content === 'string' ? this.content : step.content).getBoundingClientRect();
+    const contentRect = this.content.getBoundingClientRect();
 
     let
       x = 0,
@@ -137,13 +128,14 @@ export class TrailStep {
 
       if (rect.y > window.innerHeight / 2) y = rect.y - contentRect.height - 16;
       else y = rect.bottom + 16;
+
+      x = x + contentRect.width >= window.innerWidth ? window.innerWidth - contentRect.width - 16 : x < 16 ? 16 : x;
     } else {
       x = window.innerWidth / 2 - contentRect.width / 2;
       y = window.innerHeight / 2 - contentRect.height / 2;
     }
 
-    if (typeof step.content === 'string') this.content.style.translate = `${x}px ${y}px`;
-    else step.content.style.translate = `${x}px ${y}px`;
+    this.content.style.translate = `${x}px ${y}px`;
   }
 
   private listeners() {
@@ -160,12 +152,10 @@ export class TrailStep {
 
     this.trail.classList.add('no-transition');
 
-    if (this.currentStep.attachedEl) {
-      const rect = this.getRect(this.currentStep);
-      
-      this.stepPosition(rect);
-      this.contentPosition(this.currentStep, rect);
-    } else this.contentPosition(this.currentStep);
+    const rect = this.currentStep.attachedEl ? this.getRect(this.currentStep) : undefined;
+
+    this.backdropPosition(this.currentStep, rect);
+    this.contentPosition(this.currentStep, rect);
 
     this.trail.classList.remove('no-transition');
   }

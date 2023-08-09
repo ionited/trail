@@ -17,7 +17,6 @@ export class TrailCore {
   }
 
   back() {
-
     this.stepId = this.step.back(this.stepId);
   }
 

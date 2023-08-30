@@ -63,7 +63,9 @@ export class TrailCore {
   }
 
   private addWrapper() {
-    if (document.querySelector('.trail')) return;
+    const trail = document.querySelector('.trail') as HTMLElement;
+
+    if (trail) return this.trail = trail;
 
     const wrapper = document.createElement('div');
 

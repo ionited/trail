@@ -69,7 +69,10 @@ export class TrailStep {
         this.content.appendChild(step.content);
       }
 
+      this.backdrop.classList.add('show');
+
       this.content.classList.add('visible');
+      this.content.classList.add('show');
 
       if (step.attachedEl) {
         const rect = this.getRect(step);

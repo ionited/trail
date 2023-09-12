@@ -6,7 +6,6 @@ export interface Step {
 }
 
 export class TrailStep {
-
   steps: Step[];
 
   private backdrop: HTMLElement;
@@ -162,5 +161,4 @@ export class TrailStep {
 
     this.trail.classList.remove('no-transition');
   }
-  
 }

@@ -1,5 +1,6 @@
 import scss from 'rollup-plugin-scss';
 import typescript from 'rollup-plugin-typescript2';
+import terser from '@rollup/plugin-terser';
 
 export default {
   input: './src/trail.ts',
@@ -16,6 +17,7 @@ export default {
   }],
   plugins: [
     scss({ output: false, outputStyle: 'compressed' }),
-    typescript()
+    typescript(),
+    terser()
   ]
 }

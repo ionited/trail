@@ -32,6 +32,7 @@
     "dist/**/*"
   ],
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.3",
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-typescript2": "^0.35.0",
     "sass": "^1.42.1",

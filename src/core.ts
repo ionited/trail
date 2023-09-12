@@ -79,5 +79,4 @@ export class TrailCore {
 
     this.trail = wrapper;
   }
-
 }

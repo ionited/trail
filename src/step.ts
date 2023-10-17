@@ -65,7 +65,7 @@ export class TrailStep {
       if (typeof step.content === 'string') this.content.innerHTML = step.content;
       else {
         this.content.innerHTML = '';
-        this.content.appendChild(step.content);
+        this.content.appendChild(step.content.cloneNode(true));
       }
 
       this.backdrop.classList.add('show');

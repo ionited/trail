@@ -35,15 +35,10 @@ export class TrailCore {
 
     document.body.classList.remove('trail-body');
 
-    backdrop.ontransitionend = () => {
+    setTimeout(() => {
       backdrop.classList.remove('show');
       content.classList.remove('show');
-
-      backdrop.removeAttribute('style');
-      content.removeAttribute('style');
-
-      backdrop.ontransitionend = null;
-    }
+    });
   }
 
   destroy() {

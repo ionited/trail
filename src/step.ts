@@ -10,8 +10,6 @@ export class TrailStep {
 
   private backdrop: HTMLElement;
   private content: HTMLElement;
-  private currentStep: Step | undefined;
-  private currentStepParent: HTMLElement | null = null;
   private trail: HTMLElement;
   private updateFunc: Function = this.update.bind(this);
 
@@ -65,16 +63,16 @@ export class TrailStep {
     this.content.classList.remove('visible');
 
     setTimeout(() => {
-      if (this.currentStep) {
-        if (typeof this.currentStep.content === 'string') this.content.innerHTML = '';
-        else if (this.currentStepParent) this.currentStepParent.appendChild(this.content.removeChild(this.currentStep.content));
+      if ((window as any).trailCurrentStep) {
+        if (typeof (window as any).trailCurrentStep.content === 'string') this.content.innerHTML = '';
+        else if ((window as any).trailCurrentStepParent) (window as any).trailCurrentStepParent.appendChild(this.content.removeChild((window as any).trailCurrentStep.content));
       }
 
       if (typeof step.content === 'string') {
-        this.currentStepParent = null;
+        (window as any).trailCurrentStepParent = null;
         this.content.innerHTML = step.content;
       } else {
-        this.currentStepParent = step.content.parentElement;
+        (window as any).trailCurrentStepParent = step.content.parentElement;
         this.content.appendChild(step.content);
       }
 
@@ -89,7 +87,7 @@ export class TrailStep {
         this.contentPosition(step, rect);
       } else this.contentPosition(step);
 
-      this.currentStep = step;
+      (window as any).trailCurrentStep = step;
     }, 250);
 
     return step.id;
@@ -160,14 +158,14 @@ export class TrailStep {
   }
 
   private update() {
-    if (!this.currentStep) return;
+    if (!(window as any).trailCurrentStep) return;
 
     this.trail.classList.add('no-transition');
 
-    const rect = this.currentStep.attachedEl ? this.getRect(this.currentStep) : undefined;
+    const rect = (window as any).trailCurrentStep.attachedEl ? this.getRect((window as any).trailCurrentStep) : undefined;
 
-    this.backdropPosition(this.currentStep, rect);
-    this.contentPosition(this.currentStep, rect);
+    this.backdropPosition((window as any).trailCurrentStep, rect);
+    this.contentPosition((window as any).trailCurrentStep, rect);
 
     this.trail.classList.remove('no-transition');
   }

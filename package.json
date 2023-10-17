@@ -1,6 +1,6 @@
 {
   "name": "@ionited/trail",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Guide your user, step by step",
   "main": "./dist/trail.js",
   "module": "./dist/trail.esm.js",

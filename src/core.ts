@@ -30,6 +30,7 @@ export class TrailCore {
       content = this.trail?.querySelector('.trail-content') as HTMLElement;
 
     backdrop.classList.remove('visible');
+    backdrop.classList.remove('interactive');
     content.classList.remove('visible');
 
     document.body.classList.remove('trail-body');
@@ -37,6 +38,9 @@ export class TrailCore {
     backdrop.ontransitionend = () => {
       backdrop.classList.remove('show');
       content.classList.remove('show');
+
+      backdrop.removeAttribute('style');
+      content.removeAttribute('style');
 
       backdrop.ontransitionend = null;
     }

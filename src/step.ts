@@ -50,7 +50,9 @@ export class TrailStep {
 
     this.content.classList.add('show');
 
-    setTimeout(() => this.backdrop.classList.add('visible'));
+    getComputedStyle(this.backdrop).opacity;
+
+    this.backdrop.classList.add('visible');
 
     if (step.attachedEl) {
       const rect = this.getRect(step);

@@ -11,6 +11,7 @@ export class TrailStep {
   private backdrop: HTMLElement;
   private content: HTMLElement;
   private currentStep: Step | undefined;
+  private currentStepParent: HTMLElement | null = null;
   private trail: HTMLElement;
   private updateFunc: Function = this.update.bind(this);
 
@@ -64,10 +65,17 @@ export class TrailStep {
     this.content.classList.remove('visible');
 
     setTimeout(() => {
-      if (typeof step.content === 'string') this.content.innerHTML = step.content;
-      else {
-        this.content.innerHTML = '';
-        this.content.appendChild(step.content.cloneNode(true));
+      if (this.currentStep) {
+        if (typeof this.currentStep.content === 'string') this.content.innerHTML = '';
+        else if (this.currentStepParent) this.currentStepParent.appendChild(this.content.removeChild(this.currentStep.content));
+      }
+
+      if (typeof step.content === 'string') {
+        this.currentStepParent = null;
+        this.content.innerHTML = step.content;
+      } else {
+        this.currentStepParent = step.content.parentElement;
+        this.content.appendChild(step.content);
       }
 
       this.backdrop.classList.add('show');
@@ -80,9 +88,9 @@ export class TrailStep {
 
         this.contentPosition(step, rect);
       } else this.contentPosition(step);
-    }, 250);
 
-    this.currentStep = step;
+      this.currentStep = step;
+    }, 250);
 
     return step.id;
   }
